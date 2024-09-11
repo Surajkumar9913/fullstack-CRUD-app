@@ -20,7 +20,7 @@ function App() {
     }, []);
 
     const fetchEmployees = async () => {
-        const res = await axios.get("/api/employees");
+        const res = await axios.get("https://fullstack-crud-app-2vyb.onrender.com/api/employees");
         setEmployees(res.data);
     };
 
@@ -28,13 +28,13 @@ function App() {
         e.preventDefault();
         if (editId) {
             await axios.put(
-                `/api/employees/${editId}`,
+                `https://fullstack-crud-app-2vyb.onrender.com/api/employees/${editId}`,
                 formData
             );
             setEditId(null);
         } else {
             await axios.post(
-                "/api/newemployees",
+                "https://fullstack-crud-app-2vyb.onrender.com/api/newemployees",
                 formData
             );
         }
@@ -90,7 +90,7 @@ function App() {
         setisDelete(false);
     };
     const handleDelete = async (id) => {
-        await axios.delete(`/api/employees/${id}`);
+        await axios.delete(`https://fullstack-crud-app-2vyb.onrender.com/api/employees/${id}`);
         fetchEmployees();
     };
 
