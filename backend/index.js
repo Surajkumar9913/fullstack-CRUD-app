@@ -10,13 +10,7 @@ dotenv.config({ path: "./.env" });
 
 
 // Middlewares
-app.use(cors(
-    {
-        origin:["https://fullstack-crud-app-2vyb.onrender.com"],
-        methods:["POST", "GET"],
-        credentials: true
-    }
-));
+app.use(cors());
 app.use(bodyParser.json());
 
 connection.connect((err) => {
