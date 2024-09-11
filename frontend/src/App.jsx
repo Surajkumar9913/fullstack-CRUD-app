@@ -20,7 +20,7 @@ function App() {
     }, []);
 
     const fetchEmployees = async () => {
-        const res = await axios.get("http://localhost:5000/api/employees");
+        const res = await axios.get("/api/employees");
         setEmployees(res.data);
     };
 
@@ -28,13 +28,13 @@ function App() {
         e.preventDefault();
         if (editId) {
             await axios.put(
-                `http://localhost:5000/api/employees/${editId}`,
+                `/api/employees/${editId}`,
                 formData
             );
             setEditId(null);
         } else {
             await axios.post(
-                "http://localhost:5000/api/newemployees",
+                "/api/newemployees",
                 formData
             );
         }
@@ -90,7 +90,7 @@ function App() {
         setisDelete(false);
     };
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:5000/api/employees/${id}`);
+        await axios.delete(`/api/employees/${id}`);
         fetchEmployees();
     };
 
