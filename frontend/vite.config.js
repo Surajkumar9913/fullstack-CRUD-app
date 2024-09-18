@@ -6,6 +6,7 @@ export default defineConfig({
     server: {
         proxy: {
             "/api": "https://fullstack-crud-app-2vyb.onrender.com",
+            // "/api": "http://localhost:5000",
         },
     },
     plugins: [react()],

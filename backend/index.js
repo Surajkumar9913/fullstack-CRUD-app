@@ -71,7 +71,8 @@ app.delete('/api/employees/:id', (req, res) => {
 });
 
 // Start server
-app.listen(process.env.PORT || 4000, (err) => {
+const port = process.env.PORT || 4000;
+app.listen(port, (err) => {
     if (err) throw err;
-    console.log(`Server is running on port: ${process.env.PORT}`);
+    console.log(`Server is running on port: ${port}`);
 });
