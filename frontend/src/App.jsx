@@ -14,23 +14,25 @@ function App() {
         department: "",
     });
     const [editId, setEditId] = useState(null);
-
+    const apiUrl = import.meta.env.VITE_API_URL;
+    // console.log(apiUrl);
+    
     useEffect(() => {
         fetchEmployees();
     }, []);
 
     const fetchEmployees = async () => {
-        const res = await axios.get("/api/employees");
+        const res = await axios.get(`${apiUrl}/api/employees`);
         setEmployees(res.data);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (editId) {
-            await axios.put(`/api/employees/${editId}`, formData);
+            await axios.put(`${apiUrl}/api/employees/${editId}`, formData);
             setEditId(null);
         } else {
-            await axios.post("/api/newemployees", formData);
+            await axios.post(`${apiUrl}/api/newemployees`, formData);
         }
         setFormData({
             fullName: "",
@@ -84,7 +86,7 @@ function App() {
         setisDelete(false);
     };
     const handleDelete = async (id) => {
-        await axios.delete(`/api/employees/${id}`);
+        await axios.delete(`${apiUrl}/api/employees/${id}`);
         fetchEmployees();
     };
 
