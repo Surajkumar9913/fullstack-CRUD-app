@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,16 +15,23 @@ function App() {
         department: "",
     });
     const [editId, setEditId] = useState(null);
+    const [loader, setLoader] = useState(true);
     const apiUrl = import.meta.env.VITE_API_URL;
     // console.log(apiUrl);
-    
+
     useEffect(() => {
         fetchEmployees();
     }, []);
 
     const fetchEmployees = async () => {
-        const res = await axios.get(`${apiUrl}/api/employees`);
-        setEmployees(res.data);
+        try {
+            const res = await axios.get(`${apiUrl}/api/employees`);
+            setEmployees(res.data);
+        } catch (error) {
+            console.error("Error fetching employees:", error);
+        } finally {
+            setLoader(false);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -141,6 +149,20 @@ function App() {
                         </tr>
                     </thead>
                     <tbody>
+                        {loader && (
+                            <tr>
+                                <td className="bg-blue-200 border border-blue-500 px-2 sm:px-4 py-2">
+                                    1
+                                </td>
+                                <td colSpan="100%" className="text-center">
+                                    <ClipLoader color="#09f" size={40} />
+                                    <p className="text-blue-600 text-xl">
+                                        Wait for loading... the data
+                                    </p>
+                                </td>
+                            </tr>
+                        )}
+
                         {employees.map((employee, index) => (
                             <tr
                                 key={employee.id}
